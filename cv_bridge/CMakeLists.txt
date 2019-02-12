@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(cv_bridge)
 
-find_package(catkin REQUIRED COMPONENTS rosconsole sensor_msgs)
+find_package(catkin REQUIRED COMPONENTS sensor_msgs roscpp  rosconsole  sensor_msgs)
 
 if(NOT ANDROID)
   find_package(PythonLibs)
@@ -13,13 +13,26 @@ if(NOT ANDROID)
 else()
 find_package(Boost REQUIRED)
 endif()
-find_package(OpenCV 3 REQUIRED
+
+if ( NOT (OpenCV_VERSION_MAJOR VERSION_LESS 4) )
+find_package(OpenCV REQUIRED
   COMPONENTS
     opencv_core
     opencv_imgproc
     opencv_imgcodecs
+    
   CONFIG
 )
+else()
+find_package(OpenCV 3 REQUIRED
+  COMPONENTS
+    opencv_core
+    opencv_imgproc
+    opencv_highgui
+  CONFIG
+)
+endif()
+
 
 catkin_package(
   INCLUDE_DIRS include
@@ -33,6 +46,9 @@ catkin_python_setup()
 
 include_directories(include ${Boost_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS})
 
+#add_executable(image_converter_1 src/image_converter.cpp)
+#target_link_libraries(image_converter_1 ${catkin_LIBRARIES} ${OpenCV_LIBS})
+
 if(NOT ANDROID)
 add_subdirectory(python)
 endif()
@@ -41,8 +57,16 @@ if(CATKIN_ENABLE_TESTING)
   add_subdirectory(test)
 endif()
 
+#add_executable(image_converter_1 src/image_converter.cpp)
+#target_link_libraries(image_converter_1 ${OpenCV_LIBS})
+
+
 # install the include folder
 install(
   DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
+
+#add_executable(image_converter_1 src/image_converter.cpp)
+#target_link_libraries(image_converter_1 ${OpenCV_LIBS})
+

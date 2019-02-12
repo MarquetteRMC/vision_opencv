@@ -24,12 +24,14 @@
   <build_depend>python</build_depend>
   <build_depend>rosconsole</build_depend>
   <build_depend>sensor_msgs</build_depend>
+  <build_depend>image_transport</build_depend>
 
   <exec_depend>boost</exec_depend>
   <exec_depend version_gte="3.3.0">opencv3</exec_depend>
   <exec_depend>python</exec_depend>
   <exec_depend>rosconsole</exec_depend>
   <build_export_depend>sensor_msgs</build_export_depend>
+  <exec_depend>image_transport</exec_depend>
 
   <test_depend>rostest</test_depend>
   <test_depend>python-numpy</test_depend>
