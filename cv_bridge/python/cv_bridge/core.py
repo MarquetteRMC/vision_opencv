@@ -92,10 +92,12 @@ class CvBridge(object):
 
         try:
             return getCvType(encoding)
+	    
         except RuntimeError as e:
             raise CvBridgeError(e)
 
     def encoding_to_dtype_with_channels(self, encoding):
+	print("I failed in the dtype")
         return self.cvtype2_to_dtype_with_channels(self.encoding_to_cvtype2(encoding))
 
     def compressed_imgmsg_to_cv2(self, cmprs_img_msg, desired_encoding = "passthrough"):

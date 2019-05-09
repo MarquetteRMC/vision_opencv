@@ -3,6 +3,8 @@ project(cv_bridge)
 
 find_package(catkin REQUIRED COMPONENTS sensor_msgs roscpp  rosconsole  sensor_msgs)
 
+FIND_PACKAGE(Boost)
+
 if(NOT ANDROID)
   find_package(PythonLibs)
   if(PYTHONLIBS_VERSION_STRING VERSION_LESS 3)
